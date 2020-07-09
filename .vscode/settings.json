@@ -1,0 +1,9 @@
+{
+    "typescript.tsdk": "",
+    // "python.autoComplete.extraPaths": [
+    //     "C:/users/jiten/appdata/local/programs/python/python37/lib/site-packages/pyttsx3",
+    //     // "C:/Users/Jiten/Desktop/Projects/Voice Assistant/text_speech.py", 
+    // ],
+    "python.pythonPath": "C:\\Users\\Jiten\\AppData\\Local\\Programs\\Python\\Python37\\python.exe",
+    
+}

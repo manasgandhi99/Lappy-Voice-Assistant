@@ -1,0 +1,7 @@
+Python 3.3 or above
+pip install pyaudio (amd64.whl)
+pip install SpeechRecognition
+pip install pypiwin32
+pip install pyttsx3
+pip install engineio
+pip install git+git://github.com/jpercent/pyttsx.git
