@@ -2,7 +2,6 @@ from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 import pyttsx as pys
 
@@ -27,12 +26,19 @@ class Movie():
         # driver.execute_script("arguments[0].click();", WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, "//div[@class='loadingWhiteBox']"))))
         # rating = self.driver.find_element(By.XPATH,"//*[@id='rso']/div[1]/div[1]/div[1]/div[1]/div/div/div[2]/a[2]/span[1]")
         #    String text = self.driver.findElement(By.tagName("span")).getText();
-        elems = self.driver.find_elements_by_xpath("//*[@id='rso']/div[1]/div[1]/div[1]/div[1]/div/div/div[2]/a/span[1]")[1].text
-
-        print(elems)
+        try:
+            elems = self.driver.find_elements_by_xpath("//*[@id='rso']/div[1]/div[1]/div[1]/div[1]/div/div/div[2]/a/span[1]")[1].text
+            print(elems)
+            return elems
+        except Exception as e:
+            print("Error")
+            return None
         
         print("Done")
-        return elems
+        # if elems:
+        #     return elems
+        # else:
+        #     return None
 
 # bot = Movie()
 # bot.movie_review("Ghost Rider")

@@ -5,19 +5,9 @@ import datetime
 import wikipedia
 import os
 import webbrowser
+from utils import *
 from movie import *
-
-engineio = pys.init()
-engineio.setProperty('rate', 150)    
-voices = engineio.getProperty('voices')
-engineio.setProperty('voice',voices[1].id)
-volume = engineio.getProperty('volume') 
-engineio.setProperty('volume',1.0)
-
-#speak func to speakout audio
-def speak(audio):
-    engineio.say(audio)
-    engineio.runAndWait()
+from youtube import *
 
 #bot says opening words
 def greet():
@@ -33,77 +23,63 @@ def greet():
     
     # speak("How may I help you friend ?")
 
-#bot will take the specific command
-def Command():
-    r = sr.Recognizer()
+greet()
 
-    with sr.Microphone() as source:
-        audio = r.listen(source)
-        
-        try:
-            instruction = r.recognize_google(audio)
-            print(instruction)
-            return instruction.lower()
-        except sr.UnknownValueError:
-            print("Error")
-            return None
-        except sr.RequestError as e:
-            print(e)
-            return None
-
-# greet()
-
+#bot starts taking commands
 c = 0 
 while True:
     print("Start")
-    def main():
-        instruction = Command()
-
+    p = "i am man"
+    print(p.find("am"))
+    inst = Command()
+    def main(query):
+        if query!= None :
+            instruction = query
+        else :
+            instruction = Command()
+ 
         if "wikipedia" in instruction.lower():
             speak("Searching Wikipedia..")
             inst = instruction.replace("wikipedia","")
             results = wikipedia.summary(inst,sentences=2)
             print(results)
             speak(results)
+            main(None)
 
         if "open youtube" in instruction.lower():
             speak("Opening youtube")
-            webbrowser.open("www.youtube.com")
-        
-        
+            bot = Youtube()
+            query = bot.play()
+            main(query)
+            # speak("Opening youtube")
+            # webbrowser.open("www.youtube.com")
+            # speak("what would you like to see on youtube?")
+            # search = Command()
 
         if "movie review" in instruction.lower():
             speak("what is the name of the movie?")
-            r1 = sr.Recognizer()
-
-            with sr.Microphone() as source:
-                audio = r1.listen(source)
-                
-                try:
-                    review = r1.recognize_google(audio)
-                    print(review)
-                    bot = Movie()
-                    rating = bot.movie_review(review)
-                    speak("The IMDB rating of this movie is" + rating)
-                except sr.UnknownValueError:
-                    print("Error")
-                except sr.RequestError as e:
-                    print(e)
-
+            review = Command()
+            bot = Movie()
+            rating = bot.movie_review(review)
+            if rating != None:
+                speak("The IMDB rating of this movie is" + rating)
+            else:
+                speak("The IMDB rating for this movie is not available")
+            
 
         elif "close" in instruction:
+            speak("Pleasure talking to you.....Byeeee....Have a nice day!!")
             exit()
 
-        elif "open youtube" or "wikipedia" or  "close" or "movie review" not in instruction:
-            speak("I could not get an instruction to perform")
+        # elif "open youtube" or "wikipedia" or  "close" or "movie review" not in instruction:
+        #     speak("I could not get an instruction to perform")
     
     if(c>0):
         speak("What should I do next?")
 
-    main()
+    main(inst)
     c = c + 1
 
 
-#getting info from wiki
 
 
