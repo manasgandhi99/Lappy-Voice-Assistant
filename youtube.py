@@ -64,7 +64,7 @@ class Youtube():
             if c == 0:
                 print("nooo")
                 speak("Okay, Thats alright!")
-                return search
+                return search.lower()
             
             print("Done")
             c = 0
