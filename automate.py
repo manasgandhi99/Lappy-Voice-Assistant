@@ -9,7 +9,7 @@ from utils import *
 from movie import *
 from youtube import *
 from sendemail import *
-
+from google import  *
 #bot says opening words
 def greet():
     now = int(datetime.datetime.now().hour)
@@ -71,8 +71,18 @@ while True:
                     speak("The IMDB rating of this movie is" + rating)
                 else:
                     speak("The IMDB rating for this movie is not available")
+                main(None)
 
-            elif "open code" in instruction:
+            elif "google" in instruction:
+                speak("Opening Google..")
+                Google.search()
+
+            elif "save audio" in instruction:
+                speak("What audio is to be saved?")
+                audio = Command()
+                
+                
+            elif "open vscode" in instruction:
                 speak("Opening Code..")
                 codePath = "C:\\Users\\Jiten\\AppData\\Local\\Programs\\Microsoft VS Code\\code.exe"
                 os.startfile(codePath)
@@ -88,6 +98,7 @@ while True:
                     print("email sent!")
                 except Exception as e:
                     print("Error : ",e)
+                main(None)
 
             elif "close" in instruction:
                 speak("Pleasure talking to you.....Byee....Have a nice day!!")
