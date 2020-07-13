@@ -10,6 +10,8 @@ from movie import *
 from youtube import *
 from sendemail import *
 from google import  *
+from note import *
+
 #bot says opening words
 def greet():
     now = int(datetime.datetime.now().hour)
@@ -28,13 +30,13 @@ greet()
 
 #bot starts taking commands
 c = 0 
-WAKE  = "activate"
+WAKE  = "Bonjo"
 print("Start")
 
 while True:
     inst = Command()
 
-    if inst.count(WAKE) > 0:
+    if inst.count(WAKE.lower()) > 0:
         speak("I am ready!")
         inst = Command()
 
@@ -43,66 +45,103 @@ while True:
                 instruction = query
             else :
                 instruction = Command()
-    
-            if "wikipedia" in instruction:
-                speak("Searching Wikipedia..")
-                inst = instruction.replace("wikipedia","")
-                results = wikipedia.summary(inst,sentences=2)
-                print(results)
-                speak(results)
-                main(None)
+            
+            wiki = ["open in wikipedia","browse in wikipedia","search in wikipedia"]
+            for words in wiki :
+                if words in instruction:
+                    speak("Searching Wikipedia..")
+                    inst = instruction.replace("wikipedia","")
+                    results = wikipedia.summary(inst,sentences=2)
+                    print(results)
+                    speak(results)
+                    main(None)
+                    break
 
-            elif "open youtube" in instruction:
-                speak("Opening youtube..")
-                bot = Youtube()
-                query = bot.play()
-                main(query)
-                # speak("Opening youtube")
-                # webbrowser.open("www.youtube.com")
-                # speak("what would you like to see on youtube?")
-                # search = Command()
+            you = ["open youtube","browse in youtube","watch a video","look for a video"]
+            for words in you :
+                if words in instruction:
+                    speak("Opening youtube..")
+                    bot = Youtube()
+                    query = bot.play()
+                    main(query)
+                    break
+                    # speak("Opening youtube")
+                    # webbrowser.open("www.youtube.com")
+                    # speak("what would you like to see on youtube?")
+                    # search = Command()
 
-            elif "movie review" in instruction:
-                speak("what is the name of the movie?")
-                review = Command()
-                bot = Movie()
-                rating = bot.movie_review(review)
-                if rating != None:
-                    speak("The IMDB rating of this movie is" + rating)
-                else:
-                    speak("The IMDB rating for this movie is not available")
-                main(None)
+            mov = ["movie review","imdb rating","movie rating"]
+            for words in mov :
+                if words in instruction:
+                    speak("what is the name of the movie?")
+                    review = Command()
+                    bot = Movie()
+                    rating = bot.movie_review(review)
+                    if rating != None:
+                        speak("The IMDB rating of this movie is" + rating)
+                    else:
+                        speak("The IMDB rating for this movie is not available")
+                    main(None)
+                    break
+            
+            gog = ["open google","browse in google","search in google","open browser"]
+            for words in gog :
+                if "open google" in instruction:
+                    speak("Opening Google..")
+                    speak("What should I search for?")
+                    text = Command()
+                    Google.search(text)
+                    break
+            
+            aud = ["save my audio","take my audio","store my audio"]
+            for words in aud :
+                if words in instruction:
+                    speak("What audio is to be saved?")
+                    audio = Command()
+                    saveVoice(audio)
+                    break
+            
+            cod = ["open vscode","open my favourite ide","open new code file"]
+            for words in cod :
+                if words in instruction:
+                    speak("Opening Code..")
+                    codePath = "C:\\Users\\Jiten\\AppData\\Local\\Programs\\Microsoft VS Code\\code.exe"
+                    os.startfile(codePath)
+                    main(None)
+                    break
+            
+            ema = ["send email","write an email","send mail"]
+            for words in ema :
+                if words in instruction:
+                    try:
+                        speak("What is the reciever's email address?")
+                        to = Command()
+                        speak("What should I send?")
+                        content = Command()
+                        # to = "example@gmail.com"
+                        sendEmail.send(to,content)
+                        speak("Email sent successfully!")
+                        print("email sent!")
+                    except Exception as e:
+                        print("Error : ",e)
+                    main(None)
+                    break
 
-            elif "google" in instruction:
-                speak("Opening Google..")
-                Google.search()
+            notes = ["take a note","note this","open notepad"]
+            for words in notes :
+                if words in instruction:
+                    speak("Opening Notepad..")
+                    speak("What should I note?")
+                    text = Command()
+                    Notepad.note(text)
+                    main(None)
+                    break
 
-            elif "save audio" in instruction:
-                speak("What audio is to be saved?")
-                audio = Command()
-                
-                
-            elif "open vscode" in instruction:
-                speak("Opening Code..")
-                codePath = "C:\\Users\\Jiten\\AppData\\Local\\Programs\\Microsoft VS Code\\code.exe"
-                os.startfile(codePath)
-                main(None)
-
-            elif "send email" in instruction:
-                try:
-                    speak("What should I send?")
-                    content = Command()
-                    to = "manas.gandhi@somaiya.edu"
-                    sendEmail.sendEmail(to,content)
-                    speak("Email sent successfully!")
-                    print("email sent!")
-                except Exception as e:
-                    print("Error : ",e)
-                main(None)
-
-            elif "close" in instruction:
-                speak("Pleasure talking to you.....Byee....Have a nice day!!")
-                exit()
+            clo = ["close it","bye","turn off","shut up"]
+            for words in clo :
+                if words in instruction:
+                    speak("Pleasure talking to you.....Byee....Have a nice day!!")
+                    exit()
 
         # elif "open youtube" or "wikipedia" or  "close" or "movie review" not in instruction:
         #     speak("I could not get an instruction to perform")

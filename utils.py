@@ -15,19 +15,16 @@ engineio.setProperty('voice',voices[1].id)
 volume = engineio.getProperty('volume') 
 engineio.setProperty('volume',1.0)
 
-#speak func to speakout audio
 def speak(audio):
     engineio.say(audio)
     engineio.runAndWait()
 
-#this func can save an audio
 def saveVoice(audio):
-    tts = gTTS(text= audio,Lang="en")
+    tts = gTTS(text= audio)
     filename = "voice.mp3"
-    tts.save()
+    tts.save(filename)
     playsound.playsound(filename)
 
-#bot will take the specific command
 def Command():
     r = sr.Recognizer()
 
@@ -46,3 +43,5 @@ def Command():
             speak("OOpss..There was some error please try again!")
             # return None
     return instruction.lower()
+
+# saveVoice("Hi I am fine")
