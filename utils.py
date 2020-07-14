@@ -40,7 +40,7 @@ def Command():
             # return None
         except sr.RequestError as e:
             print(e)
-            speak("OOpss..There was some error please try again!")
+            speak("Oopss..There was some error please try again!")
             # return None
     return instruction.lower()
 

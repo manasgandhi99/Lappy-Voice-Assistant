@@ -5,12 +5,14 @@ import datetime
 import wikipedia
 import os
 import webbrowser
+import time
 from utils import *
 from movie import *
 from youtube import *
 from sendemail import *
 from google import  *
 from note import *
+from whatsapp import *
 
 #bot says opening words
 def greet():
@@ -27,7 +29,7 @@ def greet():
     # speak("How may I help you friend ?")
 
 greet()
-
+time.sleep(2)
 #bot starts taking commands
 c = 0 
 WAKE  = "Bonjo"
@@ -65,10 +67,6 @@ while True:
                     query = bot.play()
                     main(query)
                     break
-                    # speak("Opening youtube")
-                    # webbrowser.open("www.youtube.com")
-                    # speak("what would you like to see on youtube?")
-                    # search = Command()
 
             mov = ["movie review","imdb rating","movie rating"]
             for words in mov :
@@ -135,6 +133,18 @@ while True:
                     text = Command()
                     Notepad.note(text)
                     main(None)
+                    break
+            
+            wha = ["text him","text her","message him","send a message","message her"]
+            for words in wha :
+                if words in instruction:
+                    speak("Opening Whatsapp..")
+                    speak("What is the name of the contact on Whatsapp?")
+                    to = Command()
+                    speak("What message should I send?")
+                    message = Command()
+                    com = Whatsapp.msg(to,message)
+                    main(com)
                     break
 
             clo = ["close it","bye","turn off","shut up"]
