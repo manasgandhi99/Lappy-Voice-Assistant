@@ -28,18 +28,18 @@ def greet():
     
     # speak("How may I help you friend ?")
 
-# greet()
-# time.sleep(2)
+greet()
+time.sleep(2)
 #bot starts taking commands
 c = 0 
-WAKE  = "Bonjo"
+WAKE  = "Bonjour"
 print("Start")
 
 while True:
     inst = Command()
 
     if inst.count(WAKE.lower()) > 0:
-        speak("I am ready!")
+        speak("I am ready! What Should I do?")
         inst = Command()
 
         def main(query):
