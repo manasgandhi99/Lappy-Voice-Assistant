@@ -8,7 +8,7 @@ from selenium.webdriver.common.keys import Keys
 import pyttsx as pys
 from utils import *
 
-class Youtube():
+class Youtube:
     
     def __init__(self):
         # self.driver = webdriver.Chrome(executable_path="C:/webdrivers/chromedriver")

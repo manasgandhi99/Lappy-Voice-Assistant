@@ -5,7 +5,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import pyttsx as pys
 
-class Movie():
+class Movie:
     
     def __init__(self):
         # self.driver = webdriver.Chrome(executable_path="C:/webdrivers/chromedriver")

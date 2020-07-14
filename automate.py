@@ -28,8 +28,8 @@ def greet():
     
     # speak("How may I help you friend ?")
 
-greet()
-time.sleep(2)
+# greet()
+# time.sleep(2)
 #bot starts taking commands
 c = 0 
 WAKE  = "Bonjo"
@@ -48,7 +48,7 @@ while True:
             else :
                 instruction = Command()
             
-            wiki = ["open in wikipedia","browse in wikipedia","search in wikipedia"]
+            wiki = ["open in wikipedia","browse in wikipedia","search in wikipedia","wikipedia"]
             for words in wiki :
                 if words in instruction:
                     speak("Searching Wikipedia..")
@@ -143,7 +143,8 @@ while True:
                     to = Command()
                     speak("What message should I send?")
                     message = Command()
-                    com = Whatsapp.msg(to,message)
+                    bot = Whatsapp
+                    com = bot(to,message).msg()
                     main(com)
                     break
 

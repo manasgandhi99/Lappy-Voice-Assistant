@@ -1,6 +1,6 @@
 import smtplib
 
-class sendEmail():
+class sendEmail:
     def send(self,to,content):
         server = smtplib.SMTP('smtp.gmail.com',587)
         server.ehlo()
