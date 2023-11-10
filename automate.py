@@ -26,11 +26,12 @@ def greet():
     if now>=18 and now<24:
         speak("Good Evening , waddup waddup??")     
     
-    # speak("How may I help you friend ?")
+    
 
 greet()
 time.sleep(2)
 #bot starts taking commands
+
 c = 0 
 WAKE  = "Bonjour"
 print("Start")
@@ -154,8 +155,7 @@ while True:
                     speak("Pleasure talking to you.....Byee....Have a nice day!!")
                     exit()
 
-        # elif "open youtube" or "wikipedia" or  "close" or "movie review" not in instruction:
-        #     speak("I could not get an instruction to perform")
+        
     
         if(c>0):
             speak("What should I do next?")
